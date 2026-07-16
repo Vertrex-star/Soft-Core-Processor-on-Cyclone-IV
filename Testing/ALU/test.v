@@ -15,10 +15,10 @@ module testing;
     wire ref_cout, ref_bout;
 
     ripple_adder_8_bit ref_add (.a(a), .b(b), .cin(cin), .out(ref_sum), .cout(ref_cout));
-    ripple_subtractor  ref_sub (.a(a), .b(b), .bin_initial(cin), .diff(ref_diff), .bout_final(ref_bout));
-    AND8_custom ref_and8 (.a(a), .b(b), .out(ref_and));
-    XOR8        ref_xor8 (.a(a), .b(b), .out(ref_xor));
-    OR8_custom  ref_or8  (.a(a), .b(b), .out(ref_or));
+    ripple_subtractor  ref_sub (.a(a), .b(b), .initial_bin(cin), .diff(ref_diff), .bout(ref_bout));
+    and_8 ref_and8 (.a(a), .b(b), .out(ref_and));
+    xor_8 ref_xor8 (.a(a), .b(b), .out(ref_xor));
+    or_8  ref_or8  (.a(a), .b(b), .out(ref_or));
     shift_register ref_shift_reg (.a(a), .b(b), .dir(cin), .out(ref_shift));
 
     always @(*) begin
