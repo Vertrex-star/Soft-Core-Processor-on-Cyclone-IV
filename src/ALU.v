@@ -3,13 +3,16 @@ module ALU (
     input  [7:0] b,        
     input  [2:0] s,
     output reg [7:0] r,
-    output reg       cout
+    output reg       cout,
+	 output zero
 );
 
     wire [7:0] b_selected = s[2] ? ~b : b;
     wire       add_cin    = s[2] ? 1'b1 : 1'b0;  
     wire [8:0] add_result;   
 
+	 reg r_zero = 1'b0;
+	 
     ripple_adder_8_bit adder (
         .a   (a),
         .b   (b_selected),
@@ -26,6 +29,14 @@ module ALU (
             3'b001: {cout, r} = {1'b0, a | b};      // OR
             default:{cout, r} = 9'b0;
         endcase
+		  
+		  if(r == 0) begin 
+				r_zero = 1'b1;
+		  end 
+		  else begin
+				r_zero = 1'b0;
+		  end
     end
-
+	 
+	 assign zero = r_zero;
 endmodule
