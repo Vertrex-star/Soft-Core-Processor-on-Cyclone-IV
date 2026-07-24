@@ -1,5 +1,11 @@
-module count (input count, input inc, output countNext);
+module count #(parameter int inc)(input[7:0] count, output[7:0] countNext);
 
-assign countNext = count + inc; 
+reg[7:0] r_countrNex;
+
+always @(count) begin
+	r_countNext = count + inc; 
+end
+
+assign countNext = r_countNext;
 
 endmodule 
